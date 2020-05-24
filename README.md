@@ -7,21 +7,23 @@ I could have forked the micropython repository and include the I2S driver. Howev
 # DIY
 To include I2S support to MicroPython, you need to compile the firmware from scratch. To do that follow these steps:
 1. Clone the MicroPython repository:
-```
-git clone --recursive https://github.com/micropython/micropython.git
-```
+    ```
+    git clone --recursive https://github.com/micropython/micropython.git
+    ```
 2. Copy the files of this repository inside the folder `ports/esp32`. If you don't want to replace the files `modmachine.c`, `modmachine.h` and `Makefile`, make the following modifications to the originals:
-    a. `modmachine.c`: add the line
+    * `modmachine.c`: add the line
     ```
         { MP_ROM_QSTR(MP_QSTR_I2S), MP_ROM_PTR(&machine_i2s_type) },
     ```
     in the code block below `// wake abilities` (approx. line 256)
-    b. `modmachine.h`: add the line
+
+    * `modmachine.h`: add the line
     ```
     extern const mp_obj_type_t machine_i2s_type;
     ```
     in the code block declaring the `extern const` variables. 
-    b. `Makefile` add the line:
+
+    * `Makefile` add the line:
     ```
     	machine_i2s.c \
     ```
