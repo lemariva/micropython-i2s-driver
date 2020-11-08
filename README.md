@@ -10,7 +10,11 @@ To include I2S support to MicroPython, you need to compile the firmware from scr
     ```
     git clone --recursive https://github.com/micropython/micropython.git
     ```
-2. Copy the files of this repository inside the folder `ports/esp32`. If you don't want to replace the files `modmachine.c`, `modmachine.h` and `Makefile`, make the following modifications to the originals:
+2. Copy the files of this repository inside the folder `ports/esp32`. 
+
+:warning: If you want to directly replace the original files with the provided in this repository, be sure that you've taken the same commit hash. MicroPython changes a lot, and you'll compiling issues if you ignore this warning.
+
+If you don't want to replace the files `modmachine.c`, `modmachine.h` and `Makefile`, make the following modifications to the originals:
     * `modmachine.c`: add the line
     ```
         { MP_ROM_QSTR(MP_QSTR_I2S), MP_ROM_PTR(&machine_i2s_type) },
@@ -19,7 +23,7 @@ To include I2S support to MicroPython, you need to compile the firmware from scr
 
     * `modmachine.h`: add the line
     ```
-    extern const mp_obj_type_t machine_i2s_type;
+    extern const mp_obj_type_t machine_hw_i2s_type;
     ```
     in the code block declaring the `extern const` variables. 
 
@@ -31,4 +35,4 @@ To include I2S support to MicroPython, you need to compile the firmware from scr
 3. Compile and deploy MicroPython following the instructions from this [tutorial](https://lemariva.com/blog/2020/03/tutorial-getting-started-micropython-v20).
 
 
-I've included a compiled version (using IDF4.x) of the firmware inside the `firmware` folder ([cae77daf](https://github.com/micropython/micropython/tree/cae77daf003212684a84b1b3a331d45564a0c286)). You can deploy this version following the instructions of the [tutorial](https://lemariva.com/blog/2020/03/tutorial-getting-started-micropython-v20). The firmware has support for I2S and BLE, but it doesn't have for PSRAM. If your ESP32 has a PSRAM chip, I recommend that you compile the firmware from scratch following the above steps.
+I've included a compiled version (using IDF4.x) of the firmware inside the `firmware` folder ([b7883ce](https://github.com/micropython/micropython/commit/b7883ce74c5a9b9689d812d134117d625fd42e73)). You can deploy this version following the instructions of the [tutorial](https://lemariva.com/blog/2020/03/tutorial-getting-started-micropython-v20). The firmware has support for I2S and BLE, but it doesn't have for PSRAM. If your ESP32 has a PSRAM chip, I recommend that you compile the firmware from scratch following the above steps.
