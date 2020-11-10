@@ -17,7 +17,7 @@ To include I2S support to MicroPython, you need to compile the firmware from scr
 If you don't want to replace the files `modmachine.c`, `modmachine.h` and `Makefile`, make the following modifications to the originals:
     * `modmachine.c`: add the line
     ```
-        { MP_ROM_QSTR(MP_QSTR_I2S), MP_ROM_PTR(&machine_i2s_type) },
+        { MP_ROM_QSTR(MP_QSTR_I2S), MP_ROM_PTR(&machine_hw_i2s_type) },
     ```
     in the code block below `// wake abilities` (approx. line 256)
 
